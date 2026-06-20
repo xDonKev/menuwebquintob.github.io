@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenBite - Menú Saludable</title>
+    <style>
+        /* --- VARIABLES Y CONFIGURACIÓN BASE --- */
+        :root {
+            --primary-color: #2ec4b6;
+            --primary-dark: #229a8f;
+            --accent-green: #4caf50;
+            --bg-light: #f4f9f4;
+            --text-dark: #2d3748;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- BIENVENIDA / PRESENTACIÓN --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(46, 196, 182, 0.8)), 
+                        url('https://images.unsplash.com/photo-1610970881699-44a55b4cfd87?q=80&w=1200') no-repeat center center/cover;
+            color: var(--white);
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+
+        .btn-main {
+            background-color: var(--white);
+            color: var(--accent-green);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--bg-light);
+        }
+
+        /* --- SECCIÓN MENÚ --- */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-green);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        .btn-order {
+            background-color: var(--accent-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-order:hover {
+            background-color: #3d8b40;
+        }
+
+        /* --- SECCIÓN DE PAGO --- */
+        .checkout-section {
+            background-color: var(--white);
+            padding: 60px 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .checkout-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .product-summary {
+            background-color: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent-green);
+            font-weight: 600;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .method-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .method-box:hover {
+            border-color: var(--accent-green);
+        }
+
+        .method-box h4 {
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+
+        .qr-placeholder {
+            width: 130px;
+            height: 130px;
+            margin: 15px auto 0;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+
+        /* --- RESPONSIVO PARA CELULARES --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            .menu-container {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Menú de FRUTAS</h1>
+        <p>Si la vida no te sonríe, agrégale más fruta :D.</p>
+        <button class="btn-main" onclick="document.getElementById('menu').scrollIntoView();">Ver Menú</button>
+    </header>
+
+    <main class="menu-container" id="menu">
+        <h2 class="section-title">Este es el menú</h2>
+        
+        <div class="menu-grid">
+            <!-- TARJETA 1 (CORREGIDA) -->
+            <article class="card">
+                <img src="https://storage.googleapis.com/fitia_recipe_images/MX-R-V-00000120%2Fv3%2Frect.jpeg" alt="Bowl de Frutas" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Mangonadas</h3>
+                    <p class="card-text">Mangonadas hechas con cariño, contiene tajín, chamoy y refresca.</p>
+                    <div class="card-footer">
+                        <span class="price" data-price="1.50">$1.00</span>
+                        <button class="btn-order" onclick="selectProduct('Mangonadas', '$1.00')">Comprar</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- TARJETA 2 (PRECIO CORREGIDO EN FUNCIÓN) -->
+            <article class="card">
+                <img src="https://realhousemoms.com/wp-content/uploads/Fresas-con-Crema-RECIPE-CARD.jpg" alt="Smoothie Tropical" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Fresas con crema</h3>
+                    <p class="card-text">Deliciosas fresas con crema, preparadas para alegrar tu día.</p>
+                    <div class="card-footer">
+                        <span class="price" data-price="1.00">$1.00</span>
+                        <button class="btn-order" onclick="selectProduct('Fresas con crema', '$1.00')">Comprar</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <section class="checkout-section" id="checkout">
+        <div class="checkout-container">
+            <h2 style="color: var(--text-dark); margin-bottom: 10px;">Finaliza tu Pedido</h2>
+            <p style="color: #666; margin-bottom: 20px;">Realiza tu pago de forma segura mediante transferencia o Deuna.</p>
+            
+            <div class="product-summary" id="product-summary">
+                Selecciona un producto del menú para ver los detalles de pago.
+            </div>
+
+            <div class="payment-methods">
+                <div class="method-box">
+                    <h4>Transferencia Bancaria</h4>
+                    <p style="text-align: left; font-size: 0.9rem; color: #555;">
+                        <strong>Banco:</strong> Banco Pichincha<br>
+                        <strong>Tipo:</strong> Ahorros<br>
+                        <strong>Número:</strong> 4901988400<br>
+                        <strong>Beneficiario:</strong> Sandra Andrade
+                    </p>
+                </div>
+
+                <div class="method-box">
+                    <h4>Pago con Deuna!</h4>
+                    <p style="font-size: 0.9rem; color: #555;">Escanea desde tu app</p>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <img src="img/QRCODE.jpeg" alt="QR Deuna" style="width: 140px; height: 140px; object-fit: contain; border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px; background: white;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectProduct(name, price) {
+            // Actualiza el contenedor del resumen con el producto clickeado
+            const summaryBox = document.getElementById('product-summary');
+            summaryBox.innerHTML = `🛒 Has seleccionado: <strong>${name}</strong> por un valor de <strong>${price}</strong>`;
+            
+            // Hace un scroll suave y automático hacia la sección de pago
+            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
